@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.3'
+    defaultConfig {
+        applicationId "com.mailsimpleunderstand.sergeyloscutnikov.malipure"
+        minSdkVersion 18
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+               // version "3.10.0"
+                //arguments "-DCMAKE_FIND_ROOT_PATH=/Users/SergeyLoscutnikov/Documents/cmake-3.10.1-Darwin-x86_64/CMake.app/Contents"
+                cppFlags "-std=c++11 -frtti -fexceptions"
+            }
+        }
+
+        ndk
+                {
+                    abiFilters 'armeabi-v7a', 'arm64-v8a' //, 'x86_64', 'x86', 'armeabi'
+                }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testImplementation 'junit:junit:4.12'
+}
+
+//apply plugin: 'com.google.gms.google-services'
