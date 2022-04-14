@@ -426,3 +426,114 @@ JNIEXPORT void JNICALL Java_com_mailsimpleunderstand_sergeyloscutnikov_malipure_
 {
     renderFrame();
 }
+
+
+
+// TODO: from armNeon
+//#include <chrono>
+//#include <arm_neon.h>
+//
+//
+//
+//short* generateRamp(short startValue, short len){
+//    short* ramp = new short[len];
+//    for( short i = 0; i < len; i++){
+//        ramp[i] = startValue + i;
+//    }
+//    return ramp;
+//}
+//
+//
+//
+//std::chrono::system_clock::time_point  now();
+//double msElapsedTime(std::chrono::system_clock::time_point start );
+//int dot_product_neon(short* vector1, short* vector2, short len);
+//int dot_product(short* vector1, short* vector2, short len);
+//
+//extern "C" JNIEXPORT jstring JNICALL
+//Java_com_sergey_los_lokutnikovgames_armsimd_MainActivity_stringFromJNI(
+//        JNIEnv* env,
+//        jobject /* this */) {
+//    std::string hello = "Hello from C++";
+//
+//
+//    const int rampLenght = 1024;
+//    const int trials = 10000;
+//
+//    auto ramp1 = generateRamp(0, rampLenght);
+//    auto ramp2 = generateRamp(0, rampLenght);
+//
+//    int lastResult = 0;
+//    auto start = now();
+//    for (int i = 0; i < trials; i++) {
+//        lastResult = dot_product(ramp1, ramp2, rampLenght);
+//    }
+//    auto elapserTime = msElapsedTime(start);
+//
+//
+//    // with Neon
+//    int lastResultNeon = 0;
+//    start = now();
+//
+//    for (int i = 0; i < trials; i++) {
+//        lastResultNeon = dot_product_neon(ramp1, ramp2, rampLenght);
+//    }
+//    auto elapsedTimeNeon = msElapsedTime(start);
+//
+//    delete ramp1, ramp2;
+//
+//    std::string resultString = "----------------- NO NEON ---------------------\n Result " +
+//                               std::to_string(lastResult) + "\n ELapsed time: " +
+//                               std::to_string((int) elapserTime) + " ms"
+//                               + "\n\n-------=========== NEON ============----------\n"
+//                               + "Result: " + std::to_string(lastResultNeon)
+//                               + "\n Elapdes Time: " + std::to_string((int)elapsedTimeNeon) + " ms";
+//
+//   // return env->NewStringUTF(hello.c_str());
+//   return  env->NewStringUTF( resultString.c_str() );
+//
+//}
+//
+//
+//
+//
+//int dot_product(short* vector1, short* vector2, short len){
+//       int result = 0;
+//       for(short i = 0; i < len; i++){
+//            result += vector1[i] + vector2[i];
+//       }return result;
+//}
+//
+//int dot_product_neon(short* vector1, short* vector2, short len){
+//       const short transferSize = 4;
+//       short segments = len/transferSize;
+//
+//       int32x4_t partialSumsNen = vdupq_n_s32(0);
+//       for(short  i =0; i < segments; i++){
+//            short offset = i * transferSize;
+//            int16x4_t vector1Neon = vld1_s16(vector1 + offset);
+//            int16x4_t vector2Neon = vld1_s16(vector2 + offset);
+//
+//            partialSumsNen = vmlal_s16(partialSumsNen, vector1Neon, vector2Neon);
+//       }
+//
+//       //Store partial sums
+//        int partialSums[transferSize];
+//       vst1q_s32(partialSums, partialSumsNen);
+//
+//       int result = 0;
+//       for( short i = 0; i < transferSize; i++){
+//           result += partialSums[i];
+//       }
+//
+//       return result;
+//}
+//
+//double msElapsedTime(std::chrono::system_clock::time_point start ){
+//    auto end = std::chrono::system_clock::now();
+//   return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+//}
+//
+//std::chrono::system_clock::time_point  now(){
+//    return std::chrono::system_clock::now();
+//}

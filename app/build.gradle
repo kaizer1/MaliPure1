@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.3'
+    compileSdkVersion 31
+
     defaultConfig {
         applicationId "com.mailsimpleunderstand.sergeyloscutnikov.malipure"
         minSdkVersion 18
-        targetSdkVersion 26
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,7 +20,7 @@ android {
 
         ndk
                 {
-                    abiFilters 'armeabi-v7a', 'arm64-v8a' //, 'x86_64', 'x86', 'armeabi'
+                    abiFilters 'arm64-v8a' //, 'x86_64', 'x86', 'armeabi' 'armeabi-v7a',
                 }
     }
     buildTypes {
@@ -34,6 +34,9 @@ android {
             path "CMakeLists.txt"
         }
     }
+
+    ndkVersion '24.0.7856742'
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

@@ -88,11 +88,13 @@ endif()
   #            )
  #                              was src/main/cpp/native-lib.cpp
 
-add_library(andHelp STATIC /Users/SergeyLoscutnikov/Desktop/SDK/android-sdk-macosx/ndk-bundle/sources/android/cpufeatures/cpu-features.c)
+
+set(cpuFeatures  ../../../../AndroidSDK/ndk/24.0.7856742/sources/android/cpufeatures)
+add_library(andHelp STATIC ${cpuFeatures}/cpu-features.c)
 add_library(native-lib SHARED  src/main/cpp/texture.cpp ${los_neon} ${realNeon})
 
 target_include_directories(native-lib PRIVATE
-                           /Users/SergeyLoscutnikov/Desktop/SDK/android-sdk-macosx/ndk-bundle/sources/android/cpufeatures
+                           ${cpuFeatures}/
                            )
 
 find_library( log-lib
